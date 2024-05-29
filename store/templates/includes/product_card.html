@@ -1,13 +1,14 @@
 {% load static %}
 
-<div class="card h-100" style="width: 18rem;">
+<div class="card h-60" style="width: 18rem;">
   <img
-  class="card-img-top" src="{{ product.main_image.image.url }}"
+  class="card-img-top" src="{% if product.main_image.image %}{{ product.main_image.image.url }}{% else %}
+  {% static 'img/no-image.png' %}{% endif %}"
   alt="Картинка товара" >
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ product.category.name }}</h6>
     <p class="card-text">{{ product.description|truncatewords_html:10 }}</p>
-    <a href="#" class="btn btn-primary">Добавить</a>
+    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Перейти</a>
   </div>
 </div>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Изображение</th>
+        <th scope="col">Название</th>
+        <th scope="col">Количество</th>
+        <th scope="col">Цена за один товар</th>
+        <th scope="col">Цена</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with product=item.product %}
+          <tr>
+            <td scope="row">
+              <img src="{% if product.main_image.image %}{{ product.main_image.image.url }}{% else %}
+              {% static 'img/no-image.png' %}{% endif %}" width="300" height="250">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>
+              <form action="{% url 'cart:cart_add_product' product.id %}" method="post">
+                {% csrf_token %}
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.override }}
+                <button class="btn btn-primary" type="submit">Обновить</button>
+              </form>
+            </td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.total_price }}</td>
+            <td>
+              <form action="{% url 'cart:cart_remove_product' product.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit">Удалить</button>
+              </form>
+            </td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="bg-primary">
+        <td class="">Итого</td>
+        <td colspan="4"></td>
+        <td class="">{{ cart.get_total_price }} руб.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="align-items-center">
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Вернуться к покупкам</a>
+    <a href="#" class="btn btn-success">Перейти к оформлению</a>
+  </p>
+{% endblock %}

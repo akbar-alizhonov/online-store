@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from core import models as abs_models
 from catalog.managers import ProductManager
@@ -15,8 +16,16 @@ class Category(models.Model):
         unique=True,
     )
 
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
     def __str__(self) -> str:
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('catalog:products_by_category', args=[self.slug])
 
 
 class Product(models.Model):
@@ -51,6 +60,14 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+
+    def get_absolute_url(self):
+        return reverse('catalog:product_detail', args=[self.id, self.slug])
 
 
 class MainImage(abs_models.BaseImageModel):
