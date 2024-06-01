@@ -13,7 +13,7 @@ class ProductList(generic.ListView):
 
 
 class CategoryDetail(generic.ListView):
-    template_name = 'catalog/category_detail.html'
+    template_name = 'catalog/products_by_category.html'
     context_object_name = 'products'
 
     def get_queryset(self) -> QuerySet[models.Product]:

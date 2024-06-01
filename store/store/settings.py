@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'homepage',
     'debug_toolbar',
     'cart',
-    'about'
+    'about',
+    'orders',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,9 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 CART_SESSION_ID = 'cart'
+
+AUTH_USER_MODEL = 'users.User'
+
+
+# LOGIN
+LOGIN_REDIRECT_URL = 'homepage:homepage'

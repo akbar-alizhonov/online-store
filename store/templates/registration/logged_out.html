@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Выход из аккаунта{% endblock %}
+
+{% block content %}
+<div class="col-9 d-flex align-items-center">
+  <p>Вы вышли из аккаунта. <a href="{% url 'users:login' %}">Войти</a> в аккаунт.</p>
+</div>
+{% endblock %}

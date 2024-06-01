@@ -9,6 +9,8 @@
       <div class="col">
         {% include 'includes/product_card.html' %}
       </div>
+    {% empty %}
+      <p>Пока не завезли товар...</p>
     {% endfor %}
   </div>
 {% endblock %}

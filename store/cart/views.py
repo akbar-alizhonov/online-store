@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.contrib import messages
 
@@ -8,6 +9,7 @@ from cart.forms import CartAddProductForm
 from catalog.models import Product
 
 
+@login_required
 @require_POST
 def cart_add_product(request: HttpRequest, product_id: int):
     cart = Cart(request)
