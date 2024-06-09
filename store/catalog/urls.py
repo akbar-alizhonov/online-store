@@ -7,8 +7,8 @@ app_name = 'catalog'
 urlpatterns = [
     path('', views.ProductList.as_view(), name='product_list'),
     path(
-        'category/<slug:slug>/products/',
-        views.CategoryDetail.as_view(),
+        'category/<slug:slug>/',
+        views.ProductListByCategory.as_view(),
         name='products_by_category'
     ),
     path(

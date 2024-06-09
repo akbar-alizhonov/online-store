@@ -12,7 +12,7 @@ class ProductList(generic.ListView):
     context_object_name = 'products'
 
 
-class CategoryDetail(generic.ListView):
+class ProductListByCategory(generic.ListView):
     template_name = 'catalog/products_by_category.html'
     context_object_name = 'products'
 
