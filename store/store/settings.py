@@ -87,8 +87,12 @@ WSGI_APPLICATION = 'store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '6666',
     }
 }
 
@@ -145,3 +149,9 @@ AUTH_USER_MODEL = 'users.User'
 
 # LOGIN
 LOGIN_REDIRECT_URL = 'homepage:homepage'
+
+
+CELERY_BROKER_URL = 'amqp://user:pass@127.0.0.1:5672//'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
